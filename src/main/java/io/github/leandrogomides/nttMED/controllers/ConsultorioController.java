@@ -1,8 +1,8 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-import io.github.leandrogomides.nttMED.domains.Consulta;
-import io.github.leandrogomides.nttMED.domains.Consultorio;
-import io.github.leandrogomides.nttMED.domains.Medico;
+import io.github.leandrogomides.nttMED.model.entities.Consulta;
+import io.github.leandrogomides.nttMED.model.entities.Consultorio;
+import io.github.leandrogomides.nttMED.model.entities.Medico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +52,7 @@ public class ConsultorioController {
         sala3.setId(3L);
 
         Consultorio sala4 = new Consultorio();
-        sala4.setId(1L);
+        sala4.setId(4L);
         sala4.adicionarConsulta(1L, "João", "Ortopedia", 155.99);
 
         return ResponseEntity.ok(List.of(sala1, sala2, sala3, sala4));

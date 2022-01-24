@@ -1,6 +1,6 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-import io.github.leandrogomides.nttMED.domains.Paciente;
+import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

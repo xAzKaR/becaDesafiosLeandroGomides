@@ -1,7 +1,10 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-import io.github.leandrogomides.nttMED.domains.Medico;
-import org.apache.coyote.Response;
+import io.github.leandrogomides.nttMED.model.entities.Medico;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

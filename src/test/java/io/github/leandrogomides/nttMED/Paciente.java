@@ -1,5 +1,7 @@
 package becaDesafiosLeandroGomides.nttMED.src.test.java.io.github.leandrogomides.nttMED;
 
+import io.github.leandrogomides.nttMED.model.entities.Consultorio;
+
 import java.util.ArrayList;
 import java.util.List;
 
