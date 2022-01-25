@@ -1,10 +1,13 @@
-package io.github.leandrogomides.nttMED.domains;
+package io.github.leandrogomides.nttMED.model.entities;
 
 public class Medico {
 
     private Long id;
+
     private String nome;
+
     private String tipoDeConsulta;
+
     private double preco;
 
     @Override
@@ -17,7 +20,7 @@ public class Medico {
                 '}';
     }
 
-    public Medico(){
+    public Medico() {
     }
 
     public Long getId() {

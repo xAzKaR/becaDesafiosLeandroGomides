@@ -1,22 +1,32 @@
-package nttMED;
+package io.github.leandrogomides.nttMED.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Paciente {
 
+    private Long id;
     final String nome;
     final List<Consultorio> consultorios = new ArrayList<>();
 
-    Paciente(String nome) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Paciente(Long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
-    void adicionarConsulta(Consultorio consultorio) {
+    public void adicionarConsulta(Consultorio consultorio) {
         this.consultorios.add(consultorio);
     }
 
-    double getValorTotal() {
+    public double getValorTotal() {
         double total = 0;
 
         for (Consultorio valorConsulta : consultorios) {

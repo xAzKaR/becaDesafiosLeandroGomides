@@ -1,18 +1,37 @@
-package io.github.leandrogomides.nttMED.domains;
+package io.github.leandrogomides.nttMED.model.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Consultorio {
 
-
     private Long id;
+
+    private LocalDate data;
+
     List<Consulta> consultas = new ArrayList<>();
 
-    public Consultorio(){
+    public Consultorio() {
     }
 
     public Consultorio(Consulta consulta) {
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public Long getId() {
@@ -32,7 +51,7 @@ public class Consultorio {
         this.consultas.add(new Consulta(medico));
     }
 
-    double getValorTotal() {
+    public double getValorTotal() {
         double total = 0;
 
         for (Consulta consulta : consultas) {

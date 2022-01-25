@@ -1,8 +1,9 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-import io.github.leandrogomides.nttMED.domains.Consulta;
-import io.github.leandrogomides.nttMED.domains.Consultorio;
-import io.github.leandrogomides.nttMED.domains.Medico;
+import io.github.leandrogomides.nttMED.model.entities.Consulta;
+import io.github.leandrogomides.nttMED.model.entities.Medico;
+import io.github.leandrogomides.nttMED.model.services.ConsultaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,53 +13,43 @@ import java.util.List;
 @RequestMapping("/consulta")
 public class ConsultaController {
 
+    @Autowired
+    private ConsultaService consultaService;
+
     @PostMapping
     public ResponseEntity<Consulta> criar(@RequestBody Consulta consulta) {
-        consulta.setId(1L);
+        Consulta criarConsulta = consultaService.criar(consulta);
 
-        return ResponseEntity.created(null).body(consulta);
+        return ResponseEntity.created(null).body(criarConsulta);
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable Long id) {
+        consultaService.deletar(id);
+
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Consulta> atualizar(@RequestBody Consulta consulta, @PathVariable Long id) {
-        consulta.setId(id);
+        Consulta consultaAtualizar = consultaService.atualizar(consulta, id);
 
-        return ResponseEntity.ok(consulta);
+        return ResponseEntity.ok(consultaAtualizar);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Consulta> obter(@PathVariable Long id){
-        Consulta consulta = new Consulta(new Medico(1L, "João", "Ortopedia", 155));
-        consulta.setId(1L);
-        consulta.getMedico();
+    public ResponseEntity<Consulta> obter(@PathVariable Long id) {
+        Consulta obterConsulta = consultaService.obter(id);
 
-        Medico medico1 = new Medico(2L, "João", "Ortopedia", 155.99);
-        Consulta consulta2 = new Consulta(2L, medico1);
-        consulta2.setId(2L);
-
-        return ResponseEntity.ok(consulta2);
+        return ResponseEntity.ok(obterConsulta);
     }
 
     @GetMapping
-    public ResponseEntity<List<Consulta>> listar(){
-        Consulta consulta1 = new Consulta(new Medico(1L, "Jorge", "Ortopedia", 155.99));
-        consulta1.setId(1L);
-        Consulta consulta2 = new Consulta(new Medico(2L, "Amanda", "Pediatria", 122.51));
-        consulta2.setId(2L);
-        Consulta consulta3 = new Consulta(new Medico(3L, "Joana", "Quiropraxia", 88.55));
-        consulta3.setId(3L);
+    public ResponseEntity<List<Consulta>> listar() {
+        List<Consulta> ListaConsultas = consultaService.listar();
 
-        Medico medico = new Medico(1L, "João", "Ortopedia", 155.99);
-        Consulta consulta4 = new Consulta(medico);
-
-
-        return ResponseEntity.ok(List.of(consulta1, consulta2, consulta3, consulta4));
+        return ResponseEntity.ok(ListaConsultas);
     }
 
 }

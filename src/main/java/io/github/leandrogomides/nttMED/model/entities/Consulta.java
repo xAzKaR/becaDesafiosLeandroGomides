@@ -1,8 +1,9 @@
-package io.github.leandrogomides.nttMED.domains;
+package io.github.leandrogomides.nttMED.model.entities;
 
 public class Consulta {
 
     private Long id;
+
     private Medico medico;
 
 
@@ -18,7 +19,7 @@ public class Consulta {
         return id;
     }
 
-    public Consulta(){
+    public Consulta() {
     }
 
     public Consulta(Medico medico) {
