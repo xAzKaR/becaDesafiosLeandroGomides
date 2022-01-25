@@ -20,7 +20,7 @@ public class Medico {
                 '}';
     }
 
-    public Medico(){
+    public Medico() {
     }
 
     public Long getId() {

@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Consultorio {
 
-
-
     private Long id;
+
     private LocalDate data;
 
     List<Consulta> consultas = new ArrayList<>();
