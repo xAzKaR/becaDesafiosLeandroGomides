@@ -7,6 +7,21 @@ public class Medico {
     private String tipoDeConsulta;
     private double preco;
 
+<<<<<<< HEAD
+=======
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", tipoDeConsulta='" + tipoDeConsulta + '\'' +
+                ", preco=" + preco +
+                '}';
+    }
+
+    public Medico() {
+    }
+>>>>>>> c833cf75a0e43343beffb8277fa70a1876ead681
 
     public Long getId() {
         return id;

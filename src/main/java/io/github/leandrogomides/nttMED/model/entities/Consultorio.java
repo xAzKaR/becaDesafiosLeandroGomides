@@ -7,6 +7,7 @@ import java.util.List;
 public class Consultorio {
 
     private Long id;
+
     private LocalDate data;
     private Consulta consulta;
     private Medico medico;
