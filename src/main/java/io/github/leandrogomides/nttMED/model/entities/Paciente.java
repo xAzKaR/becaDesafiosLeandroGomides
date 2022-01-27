@@ -6,7 +6,7 @@ import java.util.List;
 public class Paciente {
 
     private Long id;
-    final String nome;
+    private String nome;
     final List<Consultorio> consultorios = new ArrayList<>();
 
     public void setId(Long id) {
@@ -15,6 +15,13 @@ public class Paciente {
 
     public Long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Paciente() {
     }
 
     public Paciente(Long id, String nome) {

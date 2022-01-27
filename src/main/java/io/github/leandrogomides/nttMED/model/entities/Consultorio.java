@@ -7,12 +7,13 @@ import java.util.List;
 public class Consultorio {
 
     private Long id;
-
     private LocalDate data;
+    private Consulta consulta;
+    private Medico medico;
 
     List<Consulta> consultas = new ArrayList<>();
 
-    public Consultorio() {
+    public Consultorio(Long aLong, Medico medico) {
     }
 
     public Consultorio(Consulta consulta) {
@@ -44,6 +45,28 @@ public class Consultorio {
 
     public void adicionarConsulta(Medico medico) {
         this.consultas.add(new Consulta(new Medico(medico.getId(), medico.getNome(), medico.getTipoDeConsulta(), medico.getPreco())));
+    }
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
+
+    public Consultorio(Long id, LocalDate data, List<Consulta> consultas) {
+        this.id = id;
+        this.data = data;
+        this.consultas = consultas;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
     public void adicionarConsulta(Long id, String nome, String tipoDeConsulta, double preco) {
