@@ -1,13 +1,25 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
+import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Data
+@Entity
 public class Paciente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    final List<Consultorio> consultorios = new ArrayList<>();
+
+    public Paciente(PacienteRequest pacienteRequest) {
+        this.setNome(pacienteRequest.getNome());
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -29,16 +41,10 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public void adicionarConsulta(Consultorio consultorio) {
-        this.consultorios.add(consultorio);
-    }
 
     public double getValorTotal() {
         double total = 0;
 
-        for (Consultorio valorConsulta : consultorios) {
-            total += valorConsulta.getValorTotal();
-        }
 
         return total;
     }

@@ -1,27 +1,41 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
 public class Medico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String tipoDeConsulta;
+
     private double preco;
 
-<<<<<<< HEAD
-=======
-    @Override
-    public String toString() {
-        return "Medico{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", tipoDeConsulta='" + tipoDeConsulta + '\'' +
-                ", preco=" + preco +
-                '}';
-    }
 
     public Medico() {
     }
->>>>>>> c833cf75a0e43343beffb8277fa70a1876ead681
+
+    public Medico(Long id, String nome, String tipoDeConsulta, double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.tipoDeConsulta = tipoDeConsulta;
+        this.preco = preco;
+    }
+
+    public Medico(MedicoRequest medicoRequest) {
+        this.setNome(medicoRequest.getNome());
+        this.setTipoDeConsulta(medicoRequest.getTipoDeConsulta());
+        this.setPreco(medicoRequest.getPreco());
+    }
+
 
     public Long getId() {
         return id;
@@ -52,16 +66,6 @@ public class Medico {
     }
 
     public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public Medico(){
-    }
-
-    public Medico(Long id, String nome, String tipoDeConsulta, double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.tipoDeConsulta = tipoDeConsulta;
         this.preco = preco;
     }
 }

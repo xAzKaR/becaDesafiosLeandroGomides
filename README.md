@@ -23,3 +23,12 @@
   
   ![Alt ou título da imagem](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/DiagramaConceitual.png?raw=true)
 
+## Desafo 4:
+* Implementação de Services
+* Ajustes de requisição e respostas com DTO.
+
+## Desafio 5:
+* Retorno de DTO:
+* Paciente retornando somente nome,
+* Medico retornando, nome, especialidade e preço da consulta;
+

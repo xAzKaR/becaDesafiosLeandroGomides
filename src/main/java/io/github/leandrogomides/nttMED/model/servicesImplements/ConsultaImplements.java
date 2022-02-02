@@ -1,7 +1,6 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
 import io.github.leandrogomides.nttMED.model.entities.Consulta;
-import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.services.ConsultaService;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class ConsultaImplements implements ConsultaService {
 
     @Override
     public Consulta criar(Consulta consulta) {
-        listaConsulta.add(new Consulta(++id, new Medico()));
+        listaConsulta.add(new Consulta(consulta.getId(), consulta.getData(), consulta.getMedico(), consulta.getPaciente()));
 
         return consulta;
     }
