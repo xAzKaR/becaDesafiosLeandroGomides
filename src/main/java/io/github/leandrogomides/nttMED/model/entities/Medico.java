@@ -1,5 +1,6 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,13 @@ public class Medico {
         this.tipoDeConsulta = tipoDeConsulta;
         this.preco = preco;
     }
+
+    public Medico(MedicoRequest medicoRequest) {
+        this.setNome(medicoRequest.getNome());
+        this.setTipoDeConsulta(medicoRequest.getTipoDeConsulta());
+        this.setPreco(medicoRequest.getPreco());
+    }
+
 
     public Long getId() {
         return id;

@@ -1,5 +1,6 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -15,6 +16,10 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    public Paciente(PacienteRequest pacienteRequest) {
+        this.setNome(pacienteRequest.getNome());
+    }
 
     public void setId(Long id) {
         this.id = id;

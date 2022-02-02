@@ -1,11 +1,14 @@
 package io.github.leandrogomides.nttMED.controllers;
 
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +26,10 @@ public class MedicoController {
 
 
     @PostMapping
-    public ResponseEntity<Medico> criar(@RequestBody Medico medico) {
-        Medico medicoCriado = medicoService.criar(medico);
+    public ResponseEntity<MedicoResponse> criar(@RequestBody MedicoRequest medicoRequest) {
+        MedicoResponse medicoRetornado = medicoService.criar(medicoRequest);
 
-        return ResponseEntity.created(null).body(medicoRepository.save(medicoCriado));
+        return ResponseEntity.created(null).body(medicoRetornado);
     }
 
     @PatchMapping("/{id}")
@@ -52,7 +55,7 @@ public class MedicoController {
 
     @GetMapping("/pagina/{numeroPagina}/{qtdePagina}")
     public ResponseEntity<Iterable<Medico>> listarTodos(@PathVariable int numeroPagina, @PathVariable int qtdePagina) {
-        if (qtdePagina >= 3) qtdePagina = 3;
+//        if (qtdePagina >= 3) qtdePagina = 3;
         Pageable page = PageRequest.of(numeroPagina, qtdePagina);
 
         return ResponseEntity.ok(medicoRepository.findAll(page));

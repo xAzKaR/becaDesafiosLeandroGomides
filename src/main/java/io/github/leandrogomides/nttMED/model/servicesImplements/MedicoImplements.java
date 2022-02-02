@@ -1,7 +1,11 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
+import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,14 +14,20 @@ import java.util.List;
 @Service
 public class MedicoImplements implements MedicoService {
 
+    @Autowired
+    private MedicoRepository medicoRepository;
+
+
     List<Medico> listaMedico = new ArrayList<>();
     Long id = 0L;
 
     @Override
-    public Medico criar(Medico medico) {
-        listaMedico.add(new Medico(++id, medico.getNome(), medico.getTipoDeConsulta(), medico.getPreco()));
+    public MedicoResponse criar(MedicoRequest medicoRequest) {
+        Medico medico = new Medico(medicoRequest);
 
-        return medico;
+        Medico medicoRetornado = medicoRepository.save(medico);
+
+        return MedicoResponse.transformaEmDTO(medicoRetornado);
     }
 
     @Override
@@ -39,7 +49,7 @@ public class MedicoImplements implements MedicoService {
     @Override
     public void deletar(Long id) {
         for (int i = 0; i < listaMedico.size(); i++) {
-            if(listaMedico.get(i).getId() == id){
+            if (listaMedico.get(i).getId() == id) {
                 listaMedico.remove(i);
             }
         }

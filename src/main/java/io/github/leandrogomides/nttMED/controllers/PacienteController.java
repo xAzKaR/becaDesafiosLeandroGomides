@@ -1,5 +1,7 @@
 package io.github.leandrogomides.nttMED.controllers;
 
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
+import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
@@ -22,10 +24,10 @@ public class PacienteController {
     private PacienteService pacienteService;
 
     @PostMapping
-    public ResponseEntity<Paciente> criar(@RequestBody Paciente paciente) {
-        Paciente criarPaciente = pacienteService.criar(paciente);
+    public ResponseEntity<PacienteResponse> criar(@RequestBody PacienteRequest pacienteRequest) {
+        PacienteResponse pacienteRetornado = pacienteService.criar(pacienteRequest);
 
-        return ResponseEntity.created(null).body(pacienteRepository.save(criarPaciente));
+        return ResponseEntity.created(null).body(pacienteRetornado);
     }
 
     @DeleteMapping("/{id}")

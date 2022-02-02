@@ -1,12 +1,14 @@
 package io.github.leandrogomides.nttMED.model.services;
 
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
+import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 
 import java.util.List;
 
 public interface PacienteService {
 
-    public Paciente criar(Paciente paciente);
+    public PacienteResponse criar(PacienteRequest pacienteRequest);
 
     public void deletar(Long id);
 

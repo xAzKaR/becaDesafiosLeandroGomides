@@ -1,7 +1,11 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
+import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
+import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,14 +14,19 @@ import java.util.List;
 @Service
 public class PacienteImplements implements PacienteService {
 
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
     List<Paciente> listaPaciente = new ArrayList<>();
     Long id = 0L;
 
     @Override
-    public Paciente criar(Paciente paciente) {
-        listaPaciente.add(new Paciente(++id, paciente.getNome()));
+    public PacienteResponse criar(PacienteRequest pacienteRequest) {
+        Paciente paciente = new Paciente(pacienteRequest);
 
-        return paciente;
+        Paciente pacienteRetornado = pacienteRepository.save(paciente);
+
+        return PacienteResponse.transformaEmDTO(pacienteRetornado);
     }
 
     @Override
