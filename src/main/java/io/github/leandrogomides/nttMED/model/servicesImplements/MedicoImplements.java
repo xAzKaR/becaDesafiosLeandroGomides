@@ -1,93 +1,80 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoAtualizar;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoRequestToMedico;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoToMedicoResponse;
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class MedicoImplements implements MedicoService {
 
-    @Autowired
-    private MedicoRepository medicoRepository;
 
+    private final MedicoRepository medicoRepository;
+    private final MapperMedicoRequestToMedico mapperMedicoRequestToMedico;
+    private final MapperMedicoToMedicoResponse mapperMedicoToMedicoResponse;
+    private final MapperMedicoAtualizar mapperMedicoAtualizar;
 
-    List<Medico> listaMedico = new ArrayList<>();
-    Long id = 0L;
 
     @Override
     public MedicoResponse criar(MedicoRequest medicoRequest) {
-        Medico medico = new Medico(medicoRequest);
 
-        Medico medicoRetornado = medicoRepository.save(medico);
+        Medico medicoCriado = mapperMedicoRequestToMedico.toModel(medicoRequest);
 
-        return MedicoResponse.transformaEmDTO(medicoRetornado);
+        medicoRepository.save(medicoCriado);
+
+        MedicoResponse retornoMedico = mapperMedicoToMedicoResponse.toResponse(medicoCriado);
+
+        return retornoMedico;
     }
 
     @Override
-    public Medico atualizar(Medico medicoAtualizado, Long id) {
-        Medico medico = null;
+    public MedicoResponse atualizar(MedicoRequest medicoRequest, Long id) {
+        Medico medico = medicoRepository.findById(id).get();
 
-        for (int i = 0; i < listaMedico.size(); i++) {
+        mapperMedicoAtualizar.atualizar(medicoRequest, medico);
 
-            if (listaMedico.get(i).getId() == id) {
-//                medico = listaMedico.get(i);
-                medico = listaMedico.set(i, medicoAtualizado);
-            }
+        medicoRepository.save(medico);
 
-        }
+        MedicoResponse medicoResponse = mapperMedicoToMedicoResponse.toResponse(medico);
 
-        return medico;
+        return medicoResponse;
     }
 
     @Override
     public void deletar(Long id) {
-        for (int i = 0; i < listaMedico.size(); i++) {
-            if (listaMedico.get(i).getId() == id) {
-                listaMedico.remove(i);
-            }
-        }
+        medicoRepository.deleteById(id);
     }
 
-//    @Override
-//    public Iterable<Medico> listarTodos(int numeroPagina, int qtdePagina) {
-//
-//        for (int i = 0; i < listaMedico.size(); i++) {
-//            if(listaMedico.size() >= 3 ){
-//                listaMedico.remove(i);
-//            }
-//        }
-//
-//        return null;
-//    }
 
     @Override
-    public List<Medico> listar() {
+    public List<MedicoResponse> listar() {
+        List<Medico> listaMedico = (List<Medico>) medicoRepository.findAll();
 
-        for (Medico medicos : listaMedico) {
-            System.out.println(medicos);
-        }
-
-        return listaMedico;
+        return listaMedico
+                .stream()
+                .map(mapperMedicoToMedicoResponse::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Medico obter(Long id) {
+    public MedicoResponse obter(Long id) {
+        Medico medico = medicoRepository.findById(id).get();
 
-        Medico medico = null;
-
-        for (int i = 0; i < listaMedico.size(); i++) {
-            if (listaMedico.get(i).getId() == id) {
-                medico = listaMedico.get(i);
-            }
+        if (medico == null) {
+            throw new RuntimeException("Médico com esse ID não foi encontrado ");
         }
-
-        return medico;
+        return mapperMedicoToMedicoResponse.toResponse(medico);
     }
 }

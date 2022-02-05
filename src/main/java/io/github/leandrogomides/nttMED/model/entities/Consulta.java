@@ -1,11 +1,15 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class Consulta {
 
@@ -13,6 +17,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Campo não informado")
     private LocalDate data;
 
     @ManyToOne
@@ -23,51 +28,5 @@ public class Consulta {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    public Consulta() {
-    }
 
-    public void Medico() {
-    }
-
-    public void Paciente() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Consulta(Long id, LocalDate data, Medico medico, Paciente paciente) {
-        this.id = id;
-        this.data = data;
-        this.medico = medico;
-        this.paciente = paciente;
-    }
 }

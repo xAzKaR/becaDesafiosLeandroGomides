@@ -1,76 +1,73 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
+import io.github.leandrogomides.nttMED.Mappers.MapperPacienteAtualizar;
+import io.github.leandrogomides.nttMED.Mappers.MapperPacienteRequestToPaciente;
+import io.github.leandrogomides.nttMED.Mappers.MapperPacienteToPacienteResponse;
 import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class PacienteImplements implements PacienteService {
 
-    @Autowired
     private PacienteRepository pacienteRepository;
-
-    List<Paciente> listaPaciente = new ArrayList<>();
-    Long id = 0L;
+    private final MapperPacienteRequestToPaciente mapperPacienteRequestToPaciente;
+    private final MapperPacienteToPacienteResponse mapperPacienteToPacienteResponse;
+    private final MapperPacienteAtualizar mapperPacienteAtualizar;
 
     @Override
     public PacienteResponse criar(PacienteRequest pacienteRequest) {
-        Paciente paciente = new Paciente(pacienteRequest);
+        Paciente pacienteCriado = mapperPacienteRequestToPaciente.toModel(pacienteRequest);
 
-        Paciente pacienteRetornado = pacienteRepository.save(paciente);
+        pacienteRepository.save(pacienteCriado);
 
-        return PacienteResponse.transformaEmDTO(pacienteRetornado);
+        PacienteResponse retornoPaciente = mapperPacienteToPacienteResponse.toResponse(pacienteCriado);
+        return retornoPaciente;
     }
 
     @Override
     public void deletar(Long id) {
-        for (int i = 0; i < listaPaciente.size(); i++) {
-            if (listaPaciente.get(i).getId() == id) {
-                listaPaciente.remove(i);
-            }
-
-        }
+        pacienteRepository.deleteById(id);
     }
 
     @Override
-    public Paciente atualizar(Paciente pacienteAtualizado, Long id) {
-        Paciente paciente = null;
+    public PacienteResponse atualizar(PacienteRequest pacienteRequest, Long id) {
+        Paciente paciente = pacienteRepository.findById(id).get();
 
-        for (int i = 0; i < listaPaciente.size(); i++) {
-            if (listaPaciente.get(i).getId() == id) {
-                paciente = listaPaciente.set(i, pacienteAtualizado);
-            }
+        mapperPacienteAtualizar.atualizar(pacienteRequest, paciente);
 
-        }
-        return paciente;
+        pacienteRepository.save(paciente);
+
+        PacienteResponse pacienteResponse = mapperPacienteToPacienteResponse.toResponse(paciente);
+
+        return pacienteResponse;
     }
 
     @Override
-    public Paciente obter(Long id) {
-        Paciente paciente = null;
+    public PacienteResponse obter(Long id) {
+        Paciente paciente = pacienteRepository.findById(id).get();
 
-        for (int i = 0; i < listaPaciente.size(); i++) {
-            if (listaPaciente.get(i).getId() == id) {
-                paciente = listaPaciente.get(i);
-            }
-
+        if (paciente == null) {
+            throw new RuntimeException("Paciente com esse ID não foi encontrado");
         }
-        return paciente;
+        return mapperPacienteToPacienteResponse.toResponse(paciente);
     }
 
     @Override
-    public List<Paciente> listar() {
-        for (Paciente pacientes : listaPaciente) {
-            System.out.println(pacientes);
+    public List<PacienteResponse> listar() {
+        List<Paciente> listaPaciente = (List<Paciente>) pacienteRepository.findAll();
 
-        }
-        return listaPaciente;
+        return listaPaciente
+                .stream()
+                .map(mapperPacienteToPacienteResponse::toResponse)
+                .collect(Collectors.toList());
     }
 }

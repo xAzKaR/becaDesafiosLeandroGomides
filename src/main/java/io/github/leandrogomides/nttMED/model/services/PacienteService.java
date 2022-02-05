@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface PacienteService {
 
-    public PacienteResponse criar(PacienteRequest pacienteRequest);
+    PacienteResponse criar(PacienteRequest pacienteRequest);
 
-    public void deletar(Long id);
+    void deletar(Long id);
 
-    public Paciente atualizar(Paciente paciente, Long id);
+    PacienteResponse atualizar(PacienteRequest pacienteRequest, Long id);
 
-    public Paciente obter(Long id);
+    PacienteResponse obter(Long id);
 
-    public List<Paciente> listar();
+    List<PacienteResponse> listar();
 }

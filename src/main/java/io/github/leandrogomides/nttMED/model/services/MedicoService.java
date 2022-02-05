@@ -2,23 +2,21 @@ package io.github.leandrogomides.nttMED.model.services;
 
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
-import io.github.leandrogomides.nttMED.model.entities.Medico;
 
 import java.util.List;
 
+public interface MedicoService{
 
-public interface MedicoService {
+    MedicoResponse criar(MedicoRequest MedicoRequest);
 
-    public MedicoResponse criar(MedicoRequest medicoRequest);
+    MedicoResponse atualizar(MedicoRequest medicoRequest, Long id);
 
-    public Medico atualizar(Medico medicoAtualizado, Long id);
-
-    public void deletar(Long id);
+    void deletar(Long id);
 
 //    public Iterable<Medico> listarTodos(int numeroPagina, int qtdePagina);
 
-    public List<Medico> listar();
+    List<MedicoResponse> listar();
 
-    public Medico obter(Long id);
+    MedicoResponse obter(Long id);
 
 }

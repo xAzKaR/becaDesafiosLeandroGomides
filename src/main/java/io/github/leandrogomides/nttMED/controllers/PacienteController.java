@@ -5,61 +5,79 @@ import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
 
-    @Autowired
-    private PacienteRepository pacienteRepository;
 
-    @Autowired
-    private PacienteService pacienteService;
+    private final PacienteRepository pacienteRepository;
+    private final PacienteService pacienteService;
 
     @PostMapping
     public ResponseEntity<PacienteResponse> criar(@RequestBody PacienteRequest pacienteRequest) {
-        PacienteResponse pacienteRetornado = pacienteService.criar(pacienteRequest);
+        PacienteResponse pacienteResponse = pacienteService.criar(pacienteRequest);
 
-        return ResponseEntity.created(null).body(pacienteRetornado);
+        return ResponseEntity.created(null).body(pacienteResponse);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         pacienteService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Paciente> atualizar(@RequestBody Paciente paciente, @PathVariable Long id) {
-        Paciente atualizarPaciente = pacienteService.atualizar(paciente, id);
+    public ResponseEntity<PacienteResponse> atualizar(@RequestBody PacienteRequest pacienteRequest, @PathVariable Long id) {
+        PacienteResponse atualizarPaciente = pacienteService.atualizar(pacienteRequest, id);
 
-        return ResponseEntity.ok(pacienteRepository.save(atualizarPaciente));
+        return ResponseEntity.ok(atualizarPaciente);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> obter(@PathVariable Long id) {
-        Optional<Paciente> obj = pacienteRepository.findById(id);
+    public ResponseEntity<PacienteResponse> obter(@PathVariable Long id) {
+        PacienteResponse pacienteResponse = pacienteService.obter(id);
 
-        return ResponseEntity.ok(obj.get());
+        return ResponseEntity.ok(pacienteResponse);
     }
 
     @GetMapping("/pagina/{numeroPagina}/{qtdePagina}")
     public ResponseEntity<Iterable<Paciente>> listarTodos(@PathVariable int numeroPagina, @PathVariable int qtdePagina) {
-        if (qtdePagina >= 3) qtdePagina = 3;
         Pageable page = PageRequest.of(numeroPagina, qtdePagina);
 
         return ResponseEntity.ok(pacienteRepository.findAll(page));
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Paciente>> listar() {
-        return ResponseEntity.ok(pacienteRepository.findAll());
+    public ResponseEntity<List<PacienteResponse>> listar() {
+        List<PacienteResponse> pacienteResponses = pacienteService.listar();
+        return ResponseEntity.ok(pacienteResponses);
     }
 }

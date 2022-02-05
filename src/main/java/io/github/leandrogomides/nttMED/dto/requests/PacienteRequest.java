@@ -1,14 +1,16 @@
 package io.github.leandrogomides.nttMED.dto.requests;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class PacienteRequest {
     private String nome;
+    private LocalDate DataNascimento;
+    private String email;
+    private String telefone;
 }
