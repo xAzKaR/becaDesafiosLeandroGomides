@@ -31,4 +31,8 @@
 * Retorno de DTO:
 * Paciente retornando somente nome,
 * Medico retornando, nome, especialidade e preço da consulta;
+  
+  ## Desafio 6:
+* Retorno de DTO com Mappers:
+
 
