@@ -1,64 +1,71 @@
 package io.github.leandrogomides.nttMED.controllers;
 
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoAtualizar;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoRequestToMedico;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoToMedicoResponse;
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
+import io.github.leandrogomides.nttMED.model.services.MedicoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Random;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
 
+
+    private final MedicoRepository medicoRepository;
+    private final MedicoService medicoService;
+
     @PostMapping
-    public ResponseEntity<Medico> criar(@RequestBody Medico medico) {
-        System.out.println(medico);
+    public ResponseEntity<MedicoResponse> criar(@RequestBody MedicoRequest medicoRequest) {
+        MedicoResponse medicoResponse = medicoService.criar(medicoRequest);
 
-        Random geradorID = new Random(10);
-
-        medico.setId(Math.abs(geradorID.nextLong()));
-
-        System.out.println("Criou");
-
-        return ResponseEntity.created(null).body(medico);
+        return ResponseEntity.created(null).body(medicoResponse);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Medico> atualizar(@RequestBody Medico medico, @PathVariable Long id) {
-        medico.setId(id);
 
-        return ResponseEntity.ok(medico);
+    @PatchMapping("/{id}")
+    public ResponseEntity<MedicoResponse> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
+        MedicoResponse medicoAtualizado = medicoService.atualizar(medicoRequest, id);
+
+        return ResponseEntity.ok(medicoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletar(@PathVariable Long id) {
-//        "Deletou o Médico com o ID: " + id
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        medicoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Medico>> listar() {
-        Medico med1 = new Medico(1L, "João", "Ortopedia", 60.55);
-        Medico med2 = new Medico(2L, "Maria", "Pediatria", 125.50);
-        Medico med3 = new Medico(3L, "Pedro", "Papalelopistopista", 85.55);
+    public ResponseEntity<List<MedicoResponse>> listar() {
+        List<MedicoResponse> listaMedicos = medicoService.listar();
 
-        return ResponseEntity.ok(List.of(med1, med2, med3));
+        return ResponseEntity.ok(listaMedicos);
+    }
+
+
+    @GetMapping("/pagina/{numeroPagina}/{qtdePagina}")
+    public ResponseEntity<Iterable<Medico>> listarTodos(@PathVariable int numeroPagina, @PathVariable int qtdePagina) {
+        Pageable page = PageRequest.of(numeroPagina, qtdePagina);
+
+        return ResponseEntity.ok(medicoRepository.findAll(page));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Medico> obter(@PathVariable Long id) {
-        Medico med1 = new Medico();
-        med1.setId(id);
-        med1.setNome("João");
-        med1.setTipoDeConsulta("Ortopedia");
-        med1.setPreco(155.5);
+    public ResponseEntity<MedicoResponse> obter(@PathVariable Long id) {
+        MedicoResponse medicoResponse = medicoService.obter(id);
 
-        return ResponseEntity.ok(med1);
+        return ResponseEntity.ok(medicoResponse);
     }
 
 }

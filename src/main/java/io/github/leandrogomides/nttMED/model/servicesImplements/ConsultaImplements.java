@@ -1,0 +1,78 @@
+package io.github.leandrogomides.nttMED.model.servicesImplements;
+
+import io.github.leandrogomides.nttMED.Mappers.MapperConsultaAtualizar;
+import io.github.leandrogomides.nttMED.Mappers.MapperConsultaRequestToConsulta;
+import io.github.leandrogomides.nttMED.Mappers.MapperConsultaToConsultaResponse;
+import io.github.leandrogomides.nttMED.dto.requests.ConsultaRequest;
+import io.github.leandrogomides.nttMED.dto.responses.ConsultaResponse;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
+import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
+import io.github.leandrogomides.nttMED.model.entities.Consulta;
+import io.github.leandrogomides.nttMED.model.entities.Medico;
+import io.github.leandrogomides.nttMED.model.repositories.ConsultaRepository;
+import io.github.leandrogomides.nttMED.model.services.ConsultaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RequiredArgsConstructor
+@Service
+public class ConsultaImplements implements ConsultaService {
+
+    private final ConsultaRepository consultaRepository;
+    private final MapperConsultaRequestToConsulta mapperConsultaRequestToConsulta;
+    private final MapperConsultaToConsultaResponse mapperConsultaToConsultaResponse;
+    private final MapperConsultaAtualizar mapperConsultaAtualizar;
+
+
+    @Override
+    public ConsultaResponse criar(ConsultaRequest consultaRequest) {
+        Consulta consulta = mapperConsultaRequestToConsulta.toModel(consultaRequest);
+
+        consultaRepository.save(consulta);
+
+        ConsultaResponse retornoConsulta = mapperConsultaToConsultaResponse.toResponse(consulta);
+
+        return retornoConsulta;
+    }
+
+    @Override
+    public void deletar(Long id) {
+        consultaRepository.deleteById(id);
+    }
+
+    @Override
+    public ConsultaResponse atualizar(ConsultaRequest consultaRequest, Long id) {
+        Consulta consulta = consultaRepository.findById(id).get();
+
+        mapperConsultaAtualizar.atualizar(consultaRequest, consulta);
+
+        consultaRepository.save(consulta);
+
+        ConsultaResponse consultaResponse = mapperConsultaToConsultaResponse.toResponse(consulta);
+
+        return consultaResponse;
+    }
+
+    @Override
+    public ConsultaResponse obter(Long id) {
+        Consulta consulta = consultaRepository.findById(id).get();
+
+        if(consulta == null){
+            throw new RuntimeException("Consulta não está marcada no sistema");
+        }
+        return mapperConsultaToConsultaResponse.toResponse(consulta);
+    }
+
+    @Override
+    public List<ConsultaResponse> listar() {
+        List<Consulta> listaConsultas = (List<Consulta>) consultaRepository.findAll();
+
+        return listaConsultas
+                .stream()
+                .map(mapperConsultaToConsultaResponse::toResponse)
+                .collect(Collectors.toList());
+    }
+}

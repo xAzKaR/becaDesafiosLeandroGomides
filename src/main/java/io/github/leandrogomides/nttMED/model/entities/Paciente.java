@@ -1,38 +1,51 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Builder
 public class Paciente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    final String nome;
-    final List<Consultorio> consultorios = new ArrayList<>();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @NotBlank(message = "Campo não informado")
+    @Pattern(regexp = "^[A-Z]+(.)*")
+    private String nome;
 
-    public Long getId() {
-        return id;
-    }
+    @NotBlank(message = "Campo não informado")
+    private LocalDate dataNascimento;
 
-    public Paciente(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+    @NotBlank(message = "Campo não informado")
+    @Email(message = "Campo inválido")
+    private String email;
 
-    public void adicionarConsulta(Consultorio consultorio) {
-        this.consultorios.add(consultorio);
+    @NotBlank(message = "Campo não informado")
+    private String telefone;
+
+    public Paciente(PacienteRequest pacienteRequest) {
+        this.setNome(pacienteRequest.getNome());
+        this.setDataNascimento(pacienteRequest.getDataNascimento());
+        this.setEmail(pacienteRequest.getEmail());
+        this.setTelefone(pacienteRequest.getTelefone());
     }
 
     public double getValorTotal() {
         double total = 0;
-
-        for (Consultorio valorConsulta : consultorios) {
-            total += valorConsulta.getValorTotal();
-        }
-
         return total;
     }
 }
