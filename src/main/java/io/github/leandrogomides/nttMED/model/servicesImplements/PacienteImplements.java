@@ -5,6 +5,8 @@ import io.github.leandrogomides.nttMED.Mappers.MapperPacienteRequestToPaciente;
 import io.github.leandrogomides.nttMED.Mappers.MapperPacienteToPacienteResponse;
 import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
+import io.github.leandrogomides.nttMED.exception.PacienteNotBeNullException;
+import io.github.leandrogomides.nttMED.exception.PacienteNotFoundException;
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
@@ -18,13 +20,17 @@ import java.util.stream.Collectors;
 @Service
 public class PacienteImplements implements PacienteService {
 
-    private PacienteRepository pacienteRepository;
+    private final PacienteRepository pacienteRepository;
     private final MapperPacienteRequestToPaciente mapperPacienteRequestToPaciente;
     private final MapperPacienteToPacienteResponse mapperPacienteToPacienteResponse;
     private final MapperPacienteAtualizar mapperPacienteAtualizar;
 
     @Override
     public PacienteResponse criar(PacienteRequest pacienteRequest) {
+        if (pacienteRequest.getNome() == null || pacienteRequest.getDataNascimento() == null) {
+            throw new PacienteNotBeNullException("Preencha os campos do paciente");
+        }
+
         Paciente pacienteCriado = mapperPacienteRequestToPaciente.toModel(pacienteRequest);
 
         pacienteRepository.save(pacienteCriado);
@@ -53,11 +59,11 @@ public class PacienteImplements implements PacienteService {
 
     @Override
     public PacienteResponse obter(Long id) {
+        if (pacienteRepository.findById(id).get() == null) {
+            throw new PacienteNotFoundException("Paciente com esse ID não foi encontrado");
+        }
         Paciente paciente = pacienteRepository.findById(id).get();
 
-        if (paciente == null) {
-            throw new RuntimeException("Paciente com esse ID não foi encontrado");
-        }
         return mapperPacienteToPacienteResponse.toResponse(paciente);
     }
 

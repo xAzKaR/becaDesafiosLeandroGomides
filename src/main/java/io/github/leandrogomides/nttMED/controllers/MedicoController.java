@@ -1,10 +1,9 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoAtualizar;
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoRequestToMedico;
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoToMedicoResponse;
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseAtualizar;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseListar;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
@@ -32,10 +31,17 @@ public class MedicoController {
         return ResponseEntity.created(null).body(medicoResponse);
     }
 
+//    @ExceptionHandler
+//    public ResponseEntity<ErrorObject> handleException(MedicoNotFoundException ex) {
+//        ErrorObject eObject = new ErrorObject(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis());
+//
+//        return new ResponseEntity<ErrorObject>(eObject, HttpStatus.NOT_FOUND);
+//    }
+
 
     @PatchMapping("/{id}")
-    public ResponseEntity<MedicoResponse> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
-        MedicoResponse medicoAtualizado = medicoService.atualizar(medicoRequest, id);
+    public ResponseEntity<MedicoResponseAtualizar> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
+        MedicoResponseAtualizar medicoAtualizado = medicoService.atualizar(medicoRequest, id);
 
         return ResponseEntity.ok(medicoAtualizado);
     }
@@ -47,8 +53,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MedicoResponse>> listar() {
-        List<MedicoResponse> listaMedicos = medicoService.listar();
+    public ResponseEntity<List<MedicoResponseListar>> listar() {
+        List<MedicoResponseListar> listaMedicos = medicoService.listar();
 
         return ResponseEntity.ok(listaMedicos);
     }

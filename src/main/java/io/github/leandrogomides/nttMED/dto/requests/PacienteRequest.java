@@ -5,12 +5,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class PacienteRequest {
+    private Long id;
     private String nome;
-    private LocalDate DataNascimento;
+    private LocalDate dataNascimento;
     private String email;
     private String telefone;
 }

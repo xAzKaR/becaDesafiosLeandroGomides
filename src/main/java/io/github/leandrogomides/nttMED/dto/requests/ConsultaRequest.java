@@ -1,7 +1,5 @@
 package io.github.leandrogomides.nttMED.dto.requests;
 
-import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
-import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import lombok.Data;
 
 import java.time.LocalDate;

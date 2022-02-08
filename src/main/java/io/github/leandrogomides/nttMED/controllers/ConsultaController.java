@@ -29,7 +29,7 @@ public class ConsultaController {
     private final ConsultaService consultaService;
 
     @PostMapping
-    public ResponseEntity<ConsultaResponse> criar(@RequestBody ConsultaRequest consultaRequest) {
+    public ResponseEntity<ConsultaResponse> criar(@RequestBody @Valid ConsultaRequest consultaRequest) {
         ConsultaResponse criarConsulta = consultaService.criar(consultaRequest);
 
         return ResponseEntity.created(null).body(criarConsulta);
@@ -56,7 +56,7 @@ public class ConsultaController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ConsultaResponse> atualizar(@RequestBody ConsultaRequest consultaRequest, @PathVariable Long id) {
+    public ResponseEntity<ConsultaResponse> atualizar(@RequestBody @Valid ConsultaRequest consultaRequest, @PathVariable Long id) {
         ConsultaResponse consultaAtualizar = consultaService.atualizar(consultaRequest, id);
 
         return ResponseEntity.ok(consultaAtualizar);

@@ -7,6 +7,8 @@ import io.github.leandrogomides.nttMED.dto.requests.ConsultaRequest;
 import io.github.leandrogomides.nttMED.dto.responses.ConsultaResponse;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
+import io.github.leandrogomides.nttMED.exception.ConsultaNotBeNullException;
+import io.github.leandrogomides.nttMED.exception.ConsultaNotFoundException;
 import io.github.leandrogomides.nttMED.model.entities.Consulta;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.ConsultaRepository;
@@ -14,6 +16,7 @@ import io.github.leandrogomides.nttMED.model.services.ConsultaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,10 @@ public class ConsultaImplements implements ConsultaService {
 
     @Override
     public ConsultaResponse criar(ConsultaRequest consultaRequest) {
+        if (consultaRequest.getMedico().getNome() == null || consultaRequest.getPaciente().getNome() == null) {
+            throw new ConsultaNotBeNullException("Consulta não cadastrada no sistema");
+        }
+
         Consulta consulta = mapperConsultaRequestToConsulta.toModel(consultaRequest);
 
         consultaRepository.save(consulta);
@@ -58,11 +65,12 @@ public class ConsultaImplements implements ConsultaService {
 
     @Override
     public ConsultaResponse obter(Long id) {
+        if (consultaRepository.findById(id).get() == null) {
+            throw new ConsultaNotFoundException("Consulta não está marcada no sistema");
+        }
+
         Consulta consulta = consultaRepository.findById(id).get();
 
-        if(consulta == null){
-            throw new RuntimeException("Consulta não está marcada no sistema");
-        }
         return mapperConsultaToConsultaResponse.toResponse(consulta);
     }
 

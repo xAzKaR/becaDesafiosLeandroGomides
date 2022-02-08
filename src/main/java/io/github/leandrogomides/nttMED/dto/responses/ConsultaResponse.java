@@ -11,4 +11,5 @@ public class ConsultaResponse {
     private LocalDate data;
     private MedicoRequest medico;
     private PacienteRequest paciente;
+    private String status = "Consulta marcada com sucesso! ";
 }
