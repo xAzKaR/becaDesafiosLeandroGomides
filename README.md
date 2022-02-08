@@ -33,6 +33,10 @@
 * Medico retornando, nome, especialidade e preço da consulta;
   
 ## Desafio 6:
+* Retorno de DTO com Mappers
+  
+## Desafio 7:
+* Tratamento de exceptions
 * Retorno de DTO com Mappers:
 
 
