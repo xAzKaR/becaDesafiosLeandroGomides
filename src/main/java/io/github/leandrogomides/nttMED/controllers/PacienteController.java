@@ -2,7 +2,10 @@ package io.github.leandrogomides.nttMED.controllers;
 
 import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
+<<<<<<< HEAD
 import io.github.leandrogomides.nttMED.exception.PacienteNotFoundException;
+=======
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
@@ -66,9 +69,12 @@ public class PacienteController {
     public ResponseEntity<PacienteResponse> obter(@PathVariable Long id) {
         PacienteResponse pacienteResponse = pacienteService.obter(id);
 
+<<<<<<< HEAD
         if(pacienteResponse == null){
             throw new PacienteNotFoundException("Paciente com esse ID não foi encontrado" );
         }
+=======
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
         return ResponseEntity.ok(pacienteResponse);
     }
 

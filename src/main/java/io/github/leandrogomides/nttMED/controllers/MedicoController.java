@@ -1,9 +1,17 @@
 package io.github.leandrogomides.nttMED.controllers;
 
+<<<<<<< HEAD
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseAtualizar;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseListar;
+=======
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoAtualizar;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoRequestToMedico;
+import io.github.leandrogomides.nttMED.Mappers.MapperMedicoToMedicoResponse;
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
@@ -31,6 +39,7 @@ public class MedicoController {
         return ResponseEntity.created(null).body(medicoResponse);
     }
 
+<<<<<<< HEAD
 //    @ExceptionHandler
 //    public ResponseEntity<ErrorObject> handleException(MedicoNotFoundException ex) {
 //        ErrorObject eObject = new ErrorObject(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis());
@@ -42,6 +51,12 @@ public class MedicoController {
     @PatchMapping("/{id}")
     public ResponseEntity<MedicoResponseAtualizar> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
         MedicoResponseAtualizar medicoAtualizado = medicoService.atualizar(medicoRequest, id);
+=======
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<MedicoResponse> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
+        MedicoResponse medicoAtualizado = medicoService.atualizar(medicoRequest, id);
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
 
         return ResponseEntity.ok(medicoAtualizado);
     }
@@ -53,8 +68,13 @@ public class MedicoController {
     }
 
     @GetMapping
+<<<<<<< HEAD
     public ResponseEntity<List<MedicoResponseListar>> listar() {
         List<MedicoResponseListar> listaMedicos = medicoService.listar();
+=======
+    public ResponseEntity<List<MedicoResponse>> listar() {
+        List<MedicoResponse> listaMedicos = medicoService.listar();
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
 
         return ResponseEntity.ok(listaMedicos);
     }

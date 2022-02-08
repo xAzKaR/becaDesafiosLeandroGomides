@@ -2,6 +2,10 @@ package io.github.leandrogomides.nttMED.model.services;
 
 import io.github.leandrogomides.nttMED.dto.requests.ConsultaRequest;
 import io.github.leandrogomides.nttMED.dto.responses.ConsultaResponse;
+<<<<<<< HEAD
+=======
+import io.github.leandrogomides.nttMED.model.entities.Consulta;
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
 
 import java.util.List;
 
