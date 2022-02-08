@@ -21,12 +21,14 @@
   
 ## Desafio 1: Modelagem <h2>
   
-  ![Alt ou título da imagem](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/DiagramaConceitual.png?raw=true)
+  ![Modelo Conceitual](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/SwaggerRestAPI.png?raw=true)
   
 ## Desafio 2:
 * Controllers
 * Implementar Open API na Spring REST API
-
+  
+  ![Swagger](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/Exceptions.png?raw=true)
+  
 ## Desafo 4:
 * Implementação de Services
 * Ajustes de requisição e respostas com DTO.
@@ -41,6 +43,7 @@
   
 ## Desafio 7:
 * Tratamento de exceptions
-* Retorno de DTO com Mappers:
+  
+![Exceptions](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/DiagramaConceitual.png?raw=true)
 
 
