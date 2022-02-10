@@ -1,34 +1,32 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 public class Consulta {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Campo não informado")
+    private LocalDate data;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id")
     private Medico medico;
 
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Consulta(){
-    }
-
-    public Consulta(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Consulta(Long id, Medico medico) {
-        this.id = id;
-        this.medico = medico;
-    }
 
 }

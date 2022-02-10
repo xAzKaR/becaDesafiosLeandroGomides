@@ -1,70 +1,33 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
+import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Builder
 public class Medico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Campo não informado")
+    @Pattern(regexp = "^[A-Z]+(.)*", message = "O primeiro nome deve começar com letra maiúscula")
     private String nome;
 
+    @NotBlank(message = "Campo não informado")
     private String tipoDeConsulta;
 
+    @NotBlank(message = "Campo não informado")
+    @Min(value = 1)
     private double preco;
 
-    @Override
-    public String toString() {
-        return "Medico{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", tipoDeConsulta='" + tipoDeConsulta + '\'' +
-                ", preco=" + preco +
-                '}';
-    }
-
-    public Medico(){
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getTipoDeConsulta() {
-        return tipoDeConsulta;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTipoDeConsulta(String getTipoDeConsulta) {
-        return tipoDeConsulta;
-    }
-
-    public void setTipoDeConsulta(String tipoDeConsulta) {
-        this.tipoDeConsulta = tipoDeConsulta;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-
-    public Medico(Long id, String nome, String tipoDeConsulta, double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.tipoDeConsulta = tipoDeConsulta;
-        this.preco = preco;
-    }
 }
