@@ -66,10 +66,13 @@
 * Integração do banco de dados com um container
   
 
+*Container do MYSQL no Docker
 ![Docker Banco](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/dockerbanco.png?raw=true)
 
+*Acesso ao Schema do container
 ![MySQL Banco](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/mysqlbanco.png?raw=true)
 
+*Criação do Docker Compose yml
 ![Docker Compose](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/dockercompose.png?raw=true)
 
 
