@@ -70,7 +70,7 @@
 
 ![MySQL Banco](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/mysqlbanco.png?raw=true)
 
-![Docker Compose](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/mysqlbanco.png?raw=true)
+![Docker Compose](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/dockercompose.png?raw=true)
 
 
 
