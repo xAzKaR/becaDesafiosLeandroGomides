@@ -9,12 +9,9 @@
   <td> IntelliJ </td>
   <td> Workbench </td>
   <td> SpringBoot - Maven </td>
-<<<<<<< HEAD
   <td> Java </td>
   <td> Docker </td>
-=======
       <td> Java </td>
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
     </tr>
     <tr>
   <td> v2021.3 </td>
@@ -33,7 +30,7 @@
 ## Desafio 2:
 * Controllers
 * Implementar Open API na Spring REST API
-<<<<<<< HEAD
+
 
 
 ## Desafio 3:
@@ -44,25 +41,16 @@
 ![Swagger](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/SwaggerRestAPI.png?raw=true)
 
 
-=======
-  
-![Swagger](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/SwaggerRestAPI.png?raw=true)
-
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 ## Desafo 4:
 * Implementação de Services
 * Ajustes de requisição e respostas com DTO.
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 ## Desafio 5:
 * Retorno de DTO:
 * Paciente retornando somente nome,
 * Medico retornando, nome, especialidade e preço da consulta;
   
-<<<<<<< HEAD
 
 ## Desafio 6:
 * Retorno de DTO com Mappers
@@ -75,25 +63,25 @@
 ![Exceptions](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/Exceptions.png?raw=true)
 
 
+## Desafio 6:
+* Retorno de DTO com Mappers
+  
+## Desafio 7:
+* Tratamento de exceptions
+
+![Exceptions](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/Exceptions.png?raw=true)
+
+
 ## Desafio 8:
 * Docker-Compose.yml
 * Integração do banco de dados com um container
-
+  
 
 ![Docker Banco](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/dockerbanco.png?raw=true)
 
 ![MySQL Banco](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/mysqlbanco.png?raw=true)
 
 ![Docker Compose](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/mysqlbanco.png?raw=true)
-=======
-## Desafio 6:
-* Retorno de DTO com Mappers
-  
-## Desafio 7:
-* Tratamento de exceptions
-  
-![Exceptions](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/main/Exceptions.png?raw=true)
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 
 
 
