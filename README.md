@@ -54,17 +54,7 @@
 
 ## Desafio 6:
 * Retorno de DTO com Mappers
-  
 
-## Desafio 7:
-* Tratamento de exceptions
-  
-
-![Exceptions](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/Exceptions.png?raw=true)
-
-
-## Desafio 6:
-* Retorno de DTO com Mappers
   
 ## Desafio 7:
 * Tratamento de exceptions
