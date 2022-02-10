@@ -11,7 +11,6 @@
   <td> SpringBoot - Maven </td>
   <td> Java </td>
   <td> Docker </td>
-      <td> Java </td>
     </tr>
     <tr>
   <td> v2021.3 </td>
