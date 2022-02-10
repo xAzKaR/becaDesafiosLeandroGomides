@@ -11,5 +11,12 @@ public class ConsultaResponse {
     private LocalDate data;
     private MedicoRequest medico;
     private PacienteRequest paciente;
+<<<<<<< HEAD
     private String status = "Consulta marcada com sucesso! ";
+=======
+<<<<<<< HEAD
+    private String status = "Consulta marcada com sucesso! ";
+=======
+>>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
+>>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 }
