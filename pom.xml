@@ -5,15 +5,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.2</version>
+		<version>2.6.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.leandrogomides</groupId>
 	<artifactId>nttMED</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nttMED</name>
-	<description>Sistema gerenciador de consultas hospitalares</description>
+	<description>Projeto responsável por gerenciar consultas</description>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 	</properties>
