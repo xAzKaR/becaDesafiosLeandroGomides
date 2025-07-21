@@ -1,23 +1,9 @@
 package io.github.leandrogomides.nttMED.controllers;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseAtualizar;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseListar;
-<<<<<<< HEAD
-=======
-=======
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoAtualizar;
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoRequestToMedico;
-import io.github.leandrogomides.nttMED.Mappers.MapperMedicoToMedicoResponse;
-import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
-import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
->>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
@@ -25,7 +11,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -33,7 +26,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/medico")
 public class MedicoController {
-
 
     private final MedicoRepository medicoRepository;
     private final MedicoService medicoService;
@@ -45,10 +37,6 @@ public class MedicoController {
         return ResponseEntity.created(null).body(medicoResponse);
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 //    @ExceptionHandler
 //    public ResponseEntity<ErrorObject> handleException(MedicoNotFoundException ex) {
 //        ErrorObject eObject = new ErrorObject(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis());
@@ -60,15 +48,6 @@ public class MedicoController {
     @PatchMapping("/{id}")
     public ResponseEntity<MedicoResponseAtualizar> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
         MedicoResponseAtualizar medicoAtualizado = medicoService.atualizar(medicoRequest, id);
-<<<<<<< HEAD
-=======
-=======
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<MedicoResponse> atualizar(@RequestBody MedicoRequest medicoRequest, @PathVariable Long id) {
-        MedicoResponse medicoAtualizado = medicoService.atualizar(medicoRequest, id);
->>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 
         return ResponseEntity.ok(medicoAtualizado);
     }
@@ -80,18 +59,8 @@ public class MedicoController {
     }
 
     @GetMapping
-<<<<<<< HEAD
     public ResponseEntity<List<MedicoResponseListar>> listar() {
         List<MedicoResponseListar> listaMedicos = medicoService.listar();
-=======
-<<<<<<< HEAD
-    public ResponseEntity<List<MedicoResponseListar>> listar() {
-        List<MedicoResponseListar> listaMedicos = medicoService.listar();
-=======
-    public ResponseEntity<List<MedicoResponse>> listar() {
-        List<MedicoResponse> listaMedicos = medicoService.listar();
->>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 
         return ResponseEntity.ok(listaMedicos);
     }

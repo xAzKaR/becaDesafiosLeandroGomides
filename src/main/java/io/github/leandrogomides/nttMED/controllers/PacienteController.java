@@ -2,14 +2,7 @@ package io.github.leandrogomides.nttMED.controllers;
 
 import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
-<<<<<<< HEAD
 import io.github.leandrogomides.nttMED.exception.PacienteNotFoundException;
-=======
-<<<<<<< HEAD
-import io.github.leandrogomides.nttMED.exception.PacienteNotFoundException;
-=======
->>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
 import io.github.leandrogomides.nttMED.model.entities.Paciente;
 import io.github.leandrogomides.nttMED.model.repositories.PacienteRepository;
 import io.github.leandrogomides.nttMED.model.services.PacienteService;
@@ -20,7 +13,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,18 +75,9 @@ public class PacienteController {
     public ResponseEntity<PacienteResponse> obter(@PathVariable Long id) {
         PacienteResponse pacienteResponse = pacienteService.obter(id);
 
-<<<<<<< HEAD
         if(pacienteResponse == null){
             throw new PacienteNotFoundException("Paciente com esse ID não foi encontrado" );
         }
-=======
-<<<<<<< HEAD
-        if(pacienteResponse == null){
-            throw new PacienteNotFoundException("Paciente com esse ID não foi encontrado" );
-        }
-=======
->>>>>>> b582fd10d12bda4d259a9ea43d474400a1a8a61a
->>>>>>> 1d3f4432f9a597387515bf388fce07a874c43e37
         return ResponseEntity.ok(pacienteResponse);
     }
 

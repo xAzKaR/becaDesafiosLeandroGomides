@@ -7,4 +7,6 @@ public class MedicoResponseListar {
     private Long id;
     private String nome;
     private String consulta;
+    private double preco;
+
 }
