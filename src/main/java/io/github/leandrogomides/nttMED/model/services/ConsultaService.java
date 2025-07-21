@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ConsultaService {
 
-    public ConsultaResponse criar(ConsultaRequest consultaRequest);
+    ConsultaResponse criar(ConsultaRequest consultaRequest);
 
-    public void deletar(Long id);
+    void deletar(Long id);
 
-    public ConsultaResponse atualizar(ConsultaRequest consultaRequest, Long id);
+    ConsultaResponse atualizar(ConsultaRequest consultaRequest, Long id);
 
-    public ConsultaResponse obter(Long id);
+    ConsultaResponse obter(Long id);
 
-    public List<ConsultaResponse> listar();
+    List<ConsultaResponse> listar();
 }

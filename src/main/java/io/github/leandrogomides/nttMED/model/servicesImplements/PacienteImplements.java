@@ -1,8 +1,8 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
-import io.github.leandrogomides.nttMED.Mappers.MapperPacienteAtualizar;
-import io.github.leandrogomides.nttMED.Mappers.MapperPacienteRequestToPaciente;
-import io.github.leandrogomides.nttMED.Mappers.MapperPacienteToPacienteResponse;
+import io.github.leandrogomides.nttMED.mappers.MapperPacienteAtualizar;
+import io.github.leandrogomides.nttMED.mappers.MapperPacienteRequestToPaciente;
+import io.github.leandrogomides.nttMED.mappers.MapperPacienteToPacienteResponse;
 import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
 import io.github.leandrogomides.nttMED.dto.responses.PacienteResponse;
 import io.github.leandrogomides.nttMED.exception.PacienteNotBeNullException;

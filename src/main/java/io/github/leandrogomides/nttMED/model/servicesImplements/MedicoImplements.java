@@ -1,6 +1,6 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
-import io.github.leandrogomides.nttMED.Mappers.*;
+import io.github.leandrogomides.nttMED.mappers.*;
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseAtualizar;

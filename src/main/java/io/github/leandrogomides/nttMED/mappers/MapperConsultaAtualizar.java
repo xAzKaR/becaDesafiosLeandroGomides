@@ -1,11 +1,13 @@
-package io.github.leandrogomides.nttMED.Mappers;
+package io.github.leandrogomides.nttMED.mappers;
 
 import io.github.leandrogomides.nttMED.dto.requests.ConsultaRequest;
 import io.github.leandrogomides.nttMED.model.entities.Consulta;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Component;
 
 @Mapper
+@Component
 public interface MapperConsultaAtualizar {
-    public void atualizar(ConsultaRequest consultaRequest, @MappingTarget Consulta consulta);
+    void atualizar(ConsultaRequest consultaRequest, @MappingTarget Consulta consulta);
 }

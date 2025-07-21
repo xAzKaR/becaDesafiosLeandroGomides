@@ -1,7 +1,11 @@
 package io.github.leandrogomides.nttMED.model.entities;
 
-import io.github.leandrogomides.nttMED.dto.requests.PacienteRequest;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +32,7 @@ public class Paciente {
     private String nome;
 
     @NotBlank(message = "Campo não informado")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     @Email(message = "Campo inválido")
