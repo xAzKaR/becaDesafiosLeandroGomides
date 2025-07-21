@@ -1,8 +1,7 @@
 package io.github.leandrogomides.nttMED.dto.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Data;
 
 import java.time.LocalDate;
 

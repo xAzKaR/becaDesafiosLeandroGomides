@@ -1,12 +1,16 @@
 package io.github.leandrogomides.nttMED.model.servicesImplements;
 
-import io.github.leandrogomides.nttMED.mappers.*;
 import io.github.leandrogomides.nttMED.dto.requests.MedicoRequest;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponse;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseAtualizar;
 import io.github.leandrogomides.nttMED.dto.responses.MedicoResponseListar;
 import io.github.leandrogomides.nttMED.exception.MedicoNotBeNullException;
 import io.github.leandrogomides.nttMED.exception.MedicoNotFoundException;
+import io.github.leandrogomides.nttMED.mappers.MapperMedicoAtualizar;
+import io.github.leandrogomides.nttMED.mappers.MapperMedicoRequestToMedico;
+import io.github.leandrogomides.nttMED.mappers.MapperMedicoToMedicoResponse;
+import io.github.leandrogomides.nttMED.mappers.MapperMedicoToMedicoResponseAtualizar;
+import io.github.leandrogomides.nttMED.mappers.MapperMedicoToMedicoResponseListar;
 import io.github.leandrogomides.nttMED.model.entities.Medico;
 import io.github.leandrogomides.nttMED.model.repositories.MedicoRepository;
 import io.github.leandrogomides.nttMED.model.services.MedicoService;
