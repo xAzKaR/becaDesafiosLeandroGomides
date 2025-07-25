@@ -76,4 +76,9 @@
 ![Docker Compose](https://github.com/xAzKaR/becaDesafiosLeandroGomides/blob/desafio8/dockercompose.png?raw=true)
 
 
+## TODO
+* Ajustar Mappers - Mappers por contexto
+* Ajustar médico - CRM, CPF
+* Ajustar paciente - Incluir consulta por um documento único
+
 
